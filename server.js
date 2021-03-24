@@ -10,7 +10,7 @@ app.use(compression({ filter: shouldCompress }));
 
 function shouldCompress(req, res) {
 
-  console.log(req.url, compression.filter(req, res) && !/PDFNet.*\.br\./g.test(req.url));
+  console.log(req.url, 'gzip?', compression.filter(req, res) && !/PDFNet.*\.br\./g.test(req.url));
 
   if (req.headers['x-no-compression']) {
     // don't compress responses with this request header
@@ -23,6 +23,8 @@ function shouldCompress(req, res) {
 }
 
 function shouldCompressBr(req, res) {
+  console.log(req.url, 'br?', /PDFNet.*\.br\./g.test(req.url));
+
   return /PDFNet.*\.br\./g.test(req.url);
 }
 
